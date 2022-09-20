@@ -36,6 +36,169 @@
 
     gtag('config', 'G-72PW1FZDE4');
   </script>
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<title>appendix-experiments</title>
+<style>
+  html {
+    line-height: 1.5;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: #1a1a1a;
+    background-color: #fdfdfd;
+  }
+  body {
+    margin: 0 auto;
+    max-width: 100em;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;
+  }
+  @media (max-width: 600px) {
+    body {
+      font-size: 0.9em;
+      padding: 1em;
+    }
+    h1 {
+      font-size: 1.8em;
+    }
+  }
+  @media print {
+    body {
+      background-color: transparent;
+      color: black;
+      font-size: 12pt;
+    }
+    p, h2, h3 {
+      orphans: 3;
+      widows: 3;
+    }
+    h2, h3, h4 {
+      page-break-after: avoid;
+    }
+  }
+  p {
+    margin: 1em 0;
+  }
+  a {
+    color: #1a1a1a;
+  }
+  a:visited {
+    color: #1a1a1a;
+  }
+  img {
+    max-width: 100%;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.4em;
+  }
+  h5, h6 {
+    font-size: 1em;
+    font-style: italic;
+  }
+  h6 {
+    font-weight: normal;
+  }
+  ol, ul {
+    padding-left: 1.7em;
+    margin-top: 1em;
+  }
+  li > ol, li > ul {
+    margin-top: 0;
+  }
+  blockquote {
+    margin: 1em 0 1em 1.7em;
+    padding-left: 1em;
+    border-left: 2px solid #e6e6e6;
+    color: #606060;
+  }
+  code {
+    font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+    font-size: 85%;
+    margin: 0;
+  }
+  pre {
+    margin: 1em 0;
+    overflow: auto;
+  }
+  pre code {
+    padding: 0;
+    overflow: visible;
+    overflow-wrap: normal;
+  }
+  .sourceCode {
+   background-color: transparent;
+   overflow: visible;
+  }
+  hr {
+    background-color: #1a1a1a;
+    border: none;
+    height: 1px;
+    margin: 1em 0;
+  }
+  table {
+    margin: 1em 0;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  table caption {
+    margin-bottom: 0.75em;
+  }
+  tbody {
+    margin-top: 0.5em;
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  th {
+    border-top: 1px solid #1a1a1a;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+  }
+  td {
+    padding: 0.125em 0.5em 0.25em 0.5em;
+  }
+  header {
+    margin-bottom: 4em;
+    text-align: center;
+  }
+  #TOC li {
+    list-style: none;
+  }
+  #TOC ul {
+    padding-left: 1.3em;
+  }
+  #TOC > ul {
+    padding-left: 0;
+  }
+  #TOC a:not(:hover) {
+    text-decoration: none;
+  }
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  div.columns{display: flex; gap: min(4vw, 1.5em);}
+  div.column{flex: auto; overflow-x: auto;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+  ul.task-list li input[type="checkbox"] {
+    width: 0.8em;
+    margin: 0 0.8em 0.2em -1.6em;
+    vertical-align: middle;
+  }
+</style>
+<script
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script>
+<!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+<![endif]-->
 </head>
 <body>
 
@@ -67,5 +230,517 @@
   </div>
 </section>
 
-</body>
-</html>
+
+<body>
+  <h2 class="title is-3">Environment</h2>
+  <h3 class="title is-5">Training environment</h3>
+
+  <p>The environment is built on <em>Pybullet</em> physics simulation
+  software <span class="citation" data-cites="coumans2021"></span> and it
+  is shown in Figure <a href="#fig:pybullet-env" data-reference-type="ref"
+  data-reference="fig:pybullet-env">[fig:pybullet-env]</a>. The states
+  <span class="math inline">\(\in \mathbb{R}^{11}\)</span> include the 3D
+  robot’s end-effector position, a binary variable representing the
+  gripper state (open/close), the 3D position of the block and the 1D
+  joint position for each of the 3 drawers and the door. The goal state
+  <span class="math inline">\(\in \mathbb{R}^3\)</span> is the desired
+  block position (e.g. behind the door, inside the mid-drawer or somewhere
+  on the table). The action space is discrete and consists of 10
+  object-centric motion primitives, namely reaching every object,
+  manipulating the objects (e.g. sliding or pulling), and opening and
+  closing the gripper. Given the primitives we use are relational to
+  objects they become implicitly parameterized by the corresponding object
+  pose. We also include a <em>center</em> action to move the robot back to
+  the center of the desk to have greater reachability. Finally, we also
+  include a <em>go-to-goal</em> primitive that moves the end-effector over
+  the goal position. A complete action list is shown below:</p>
+  <div class="multicols">
+  <ol>
+  <li><p>Go to door handle</p></li>
+  <li><p>Go to drawer1 handle</p></li>
+  <li><p>Go to drawer2 handle</p></li>
+  <li><p>Go to drawer3 handle</p></li>
+  <li><p>Go to center</p></li>
+  <li><p>Go to block</p></li>
+  <li><p>Go to goal</p></li>
+  <li><p>Grasp/release (Open/close the gripper)</p></li>
+  <li><p>Pull/push</p></li>
+  <li><p>Slide left/slide right</p></li>
+  </ol>
+  </div>
+
+
+  <div class="wrapfigure">
+  <p><span>r</span><span>45mm</span> <img
+  src="figures-appendix/fig1_pybullet.png" alt="image" /></p>
+  <p><span id="fig:pybullet-env" label="fig:pybullet-env"></span></p>
+  </div>
+  <p>In the case of multiple primitives for one action (i.e. actions 8, 9
+  and 10), the executed primitive depends on the current state (e.g. the
+  gripper opens if its current state is closed and viceversa).</p>
+  <p>If the agent attempts an infeasible action, such as manipulating an
+  object with the wrong primitive (e.g. pulling a sliding door) or moving
+  in a non collision-free path, the environment does not perform a
+  simulation step and the state remains unaltered. To check for
+  collisions, we use the method in <em>Pybullet</em>, which performs a
+  single raycast.</p>
+  <p>We use the sparse reward signal: <span
+  class="math inline">\(R(\cdot|s, g) = 𝟙_{\{|f(s)-g|_1 &lt;
+  \epsilon\}}\)</span>, where <span class="math inline">\(f(s)\)</span>
+  extracts the current block position from the state and <span
+  class="math inline">\(\epsilon=0.1\)</span> is a threshold determining
+  task success.</p>
+  <h2 id="app:experiments" class="title is-3">Extended Experimental Results</h2>
+  <h3 id="her" class="title is-5">HER</h3>
+  <p>We experiment with combining our method with off-policy goal
+  relabeling <span class="citation"
+  data-cites="andrychowicz2017hindsight"></span>. We evaluate different
+  relabeling ratios <span class="math inline">\(k\)</span>. As already
+  mentioned in the Results, we observe that the greater the relabeling
+  ratio, the slower the convergence to the optimal policy (see Figure <a
+  href="#fig:her-results" data-reference-type="ref"
+  data-reference="fig:her-results">1</a>). We hypothesize that this is
+  because the environment dynamics are not smooth and the policy fails to
+  generalize to distant goals despite the relabeling, which may hurt
+  performance.</p>
+  <div class="center">
+  <figure>
+  <embed src="figures-appendix/legend_her_flat.pdf"
+  id="fig:her-results" />
+  <figcaption aria-hidden="true">Effect of relabeling ratio on success
+  rate for the Medium (left) and Hard (right) task variants. Results are
+  averaged across 10 independent random seeds, shaded area represents
+  standard deviation. (Play dataset size <span
+  class="math inline">\(10^5\)</span>). </figcaption>
+  </figure>
+  <p><embed src="figures-appendix/ours_her_medium.pdf" /> <embed
+  src="figures-appendix/ours_her_hard.pdf" /></p>
+  </div>
+  <p><span id="fig:her-results" label="fig:her-results"></span></p>
+  <h3 id="app:sample-complexity" class="title is-5">Sample complexity</h3>
+  <p>Results reported in subsection <em>Sample Complexity</em> in Section
+  <a href="#sec:Experiments" data-reference-type="ref"
+  data-reference="sec:Experiments">[sec:Experiments]</a> are obtained by
+  running 5 independent random seeds for each value of <span
+  class="math inline">\(\rho\)</span> in the Medium task. We report
+  results obtained for the Hard task in Figure <a
+  href="#fig:sample-complxity-hard" data-reference-type="ref"
+  data-reference="fig:sample-complxity-hard">[fig:sample-complxity-hard]</a>,
+  which shows an increase of sample complexity as the number of feasible
+  actions increases. However, in this hard setting, several seeds for
+  several values of <span class="math inline">\(\rho\)</span> don’t reach
+  a success rate of 0.95. This is expected given that for example <span
+  class="math inline">\(\rho=0\)</span> recovers DDQN behavior which was
+  shown to fail in learning the Hard task. Consequently, in order not to
+  bias the results, we opt for only reporting the results on <span
+  class="math inline">\(\rho\)</span> values whose seeds are always
+  successful in learning.</p>
+  <div class="wrapfigure">
+  <p><span>r</span><span>45mm</span> <embed
+  src="figures_icra/boxplot_hard_True.pdf" /></p>
+  <p><span id="fig:sample-complxity-hard"
+  label="fig:sample-complxity-hard"></span></p>
+  </div>
+  <h3 id="app:robustness-datasize" class="title is-5">Robustness to play dataset size</h3>
+  <p>We study the effect of play dataset size on training performance for
+  both and DDQN+Prefill (which affects the amount of data used for
+  training the prior for and the amount of data used to prefill the replay
+  buffer for DDQN+Prefill). In Figure <a
+  href="#fig:trainig-curves-datasize-effect" data-reference-type="ref"
+  data-reference="fig:trainig-curves-datasize-effect">[fig:trainig-curves-datasize-effect]</a>
+  we show the resulting training curves using 3 different dataset sizes
+  for and DDQN+Prefill. In Figure <a
+  href="#fig:full-datasize-simulation-results" data-reference-type="ref"
+  data-reference="fig:full-datasize-simulation-results">2</a> we show the
+  resulting training curves for all baselines using the biggest dataset
+  (with <span class="math inline">\(10^5\)</span> datapoints).</p>
+  <div style="color: elfp">
+  <hr />
+  </div>
+  <p><span class="roman">ELF-P</span></p>
+  <div style="color: ddqn">
+  <hr />
+  </div>
+  <p><span class="roman">DDQN</span></p>
+  <div style="color: her">
+  <hr />
+  </div>
+  <p><span class="roman">DDQN+HER</span></p>
+  <div style="color: prefill">
+  <hr />
+  </div>
+  <p><span class="roman">DDQN+Prefill</span></p>
+  <div style="color: ddqnfd">
+  <hr />
+  </div>
+  <p><span class="roman">DDQNfD</span></p>
+  <div style="color: spirl">
+  <hr />
+  </div>
+  <p><span class="roman">SPIRL</span></p>
+  <div class="center">
+  <p><embed src="figures-appendix/medium_datasize_effect.pdf" /> <embed
+  src="figures-appendix/medium_inv_action_datasize_effect.pdf" /></p>
+  <p><embed src="figures-appendix/hard_datasize_effect.pdf" /> <embed
+  src="figures-appendix/hard_inv_action_datasize_effect.pdf" /></p>
+  </div>
+  <p><span id="fig:trainig-curves-datasize-effect"
+  label="fig:trainig-curves-datasize-effect"></span></p>
+  <figure>
+  <embed src="figures-appendix/legend.pdf"
+  id="fig:full-datasize-simulation-results" />
+  <figcaption aria-hidden="true">Success rate and number of infeasible
+  actions attempts for the Medium (top) and Hard (bottom) task variants
+  when using the biggest play dataset (<span
+  class="math inline">\(10^5\)</span> datapoints). (Results are averaged
+  across 10 independent random seeds, shaded area represents standard
+  deviation). </figcaption>
+  </figure>
+  <div class="center">
+  <p><embed src="figures-appendix/medium.pdf" /> <embed
+  src="figures-appendix/medium_inv_action.pdf" /></p>
+  <p><embed src="figures-appendix/hard.pdf" /> <embed
+  src="figures-appendix/hard_inv_action.pdf" /></p>
+  </div>
+  <p><span id="fig:full-datasize-simulation-results"
+  label="fig:full-datasize-simulation-results"></span></p>
+  <h3 id="robustness-to-imperfect-skill-execution" class="title is-5">Robustness to imperfect
+  skill execution</h3>
+  <div class="table*">
+  <table>
+  <thead>
+  <tr class="header">
+  <th style="text-align: center;">Skill failure probability</th>
+  <th style="text-align: center;">Success rate</th>
+  <th style="text-align: center;">Success rate DDQN+Prefill</th>
+  <th style="text-align: center;"></th>
+  <th style="text-align: center;"></th>
+  <th style="text-align: center;"></th>
+  <th style="text-align: center;"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td style="text-align: center;">0</td>
+  <td style="text-align: center;">1.0 <span
+  class="math inline">\(\pm\)</span> 0.00</td>
+  <td style="text-align: center;">1.0 <span
+  class="math inline">\(\pm\)</span> 0.00</td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  </tr>
+  <tr class="even">
+  <td style="text-align: center;">0.05</td>
+  <td style="text-align: center;">0.99 <span
+  class="math inline">\(\pm\)</span> 0.01</td>
+  <td style="text-align: center;">0.96 <span
+  class="math inline">\(\pm\)</span> 0.01</td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  </tr>
+  <tr class="odd">
+  <td style="text-align: center;">0.1</td>
+  <td style="text-align: center;">0.96 <span
+  class="math inline">\(\pm\)</span> 0.02</td>
+  <td style="text-align: center;">0.92 <span
+  class="math inline">\(\pm\)</span> 0.00</td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  </tr>
+  <tr class="even">
+  <td style="text-align: center;">0.2</td>
+  <td style="text-align: center;">0.91 <span
+  class="math inline">\(\pm\)</span> 0.02</td>
+  <td style="text-align: center;">0.84 <span
+  class="math inline">\(\pm\)</span> 0.03</td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  </tr>
+  <tr class="odd">
+  <td style="text-align: center;">0.5</td>
+  <td style="text-align: center;">0.75 <span
+  class="math inline">\(\pm\)</span> 0.03</td>
+  <td style="text-align: center;">0.54 <span
+  class="math inline">\(\pm\)</span> 0.04</td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  <td style="text-align: center;"></td>
+  </tr>
+  </tbody>
+  </table>
+  </div>
+  <p>In this experiment, we evaluate how robust the trained agent is to
+  imperfect skill execution. We perform test-time evaluations in which we
+  simulate that the execution of the <em>slide, pull/push</em> and
+  <em>grasp</em> skills is not successful with some probability. We
+  specifically simulate that the execution of <em>slide (pull/push)</em>
+  skill fails by setting the door (drawer) joint positions to random
+  configurations whereas we simulate that the execution of <em>grasp</em>
+  skill is unsuccessful by not updating the grasp state. In Table <a
+  href="#table:skill-failure" data-reference-type="ref"
+  data-reference="table:skill-failure">[table:skill-failure]</a>, we
+  report average success rate with increasing failure probabilities for
+  and the most competitive baseline DDQN+Prefill on the Hard task. We
+  observe that despite training with perfect skill execution, is
+  relatively robust to imperfect skill execution and it is able to
+  generalize to out of training distribution states, whereas DDQN+Prefill
+  is less robust to skill execution failure.</p>
+  <h3 id="app:soft-elfp" class="title is-5">Soft prior integration</h3>
+  <p>We implement Soft-, an ablation for our method which softens the
+  integration of the prior into learning. This modification could
+  potentially allow Soft-to recover from degenerated priors, i.e., when
+  play data has significant distribution mismatch with the target tasks of
+  interest. Soft-samples from the prior (instead of sampling from the
+  feasible set <span class="math inline">\(\alpha\)</span>) both during
+  initial exploration phase and while performing <span
+  class="math inline">\(\epsilon\)</span>-greedy exploration.
+  Additionally, during exploitation, it multiplies the softmax of Q-values
+  by the prior, thus biasing the greedy action selection towards the
+  prior. Finally, given the soft integration of the prior, it performs
+  Q-learning over the set of all actions, instead of over the reduced set
+  of feasible actions. In Figure <a href="#fig:soft_vs_hard"
+  data-reference-type="ref"
+  data-reference="fig:soft_vs_hard">[fig:soft_vs_hard]</a> we compare the
+  performance of with Soft-. We observe that while Soft-is able to learn
+  both medium and hard tasks, it has lower sample efficiency than . One of
+  the main reasons of being faster is because a hard prior integration
+  alleviates the Q-network from learning values for all state-action
+  pairs: it can focus on learning Q-values for feasible state-action pairs
+  only and ignore Q-values for unfeasible actions. This shows one of the
+  main contributions of our algorithm. Nevertheless, a soft integration
+  could be useful when dealing with degenerated priors and we reserve
+  further exploration on the topic for future work.</p>
+  <figure>
+  <img src="figures-appendix/legend_with_soft.png"
+  id="fig:soft_vs_hard_appendix"
+  alt="Comparison between and Soft-. . Success rate and number of infeasible actions attempts for the Medium (top) and Hard (bottom) task variants. (Play dataset size 10^4).Results are averaged across 10 independent random seeds, shaded area represents standard deviation) " />
+  <figcaption aria-hidden="true">Comparison between and Soft-. . Success
+  rate and number of infeasible actions attempts for the Medium (top) and
+  Hard (bottom) task variants. (Play dataset size <span
+  class="math inline">\(10^4\)</span>).Results are averaged across 10
+  independent random seeds, shaded area represents standard deviation)
+  </figcaption>
+  </figure>
+  <div class="center">
+  <p><embed src="figures-appendix/medium_with_soft_datapoints10000.pdf" />
+  <embed
+  src="figures-appendix/medium_inv_action_with_soft_datapoints10000.pdf" /></p>
+  <p><embed src="figures-appendix/hard_with_soft_datapoints10000.pdf" />
+  <embed
+  src="figures-appendix/hard_inv_action_with_soft_datapoints10000.pdf" /></p>
+  </div>
+  <p><span id="fig:soft_vs_hard_appendix"
+  label="fig:soft_vs_hard_appendix"></span></p>
+  <h2 id="app:additional_exp_details" class="title is-3">Additional experimental details</h2>
+  <h3 id="evaluation-protocol" class="title is-5">Evaluation protocol</h3>
+  <p>All reported results are obtained by evaluating the policies over 50
+  episodes every 2500 environment steps. Results are averaged over 10
+  random independent seeds unless explicitly stated. Shaded areas
+  represent standard deviation across seeds.</p>
+  <h3 id="play-dataset-collection" class="title is-5"><em>Play</em>-dataset collection</h3>
+  <p>Given that our method can learn with very little data (<span
+  class="math inline">\(\sim\)</span>1h30min of data collection), play
+  data could in practice be collected by a few human operators choosing
+  from a predefined set of primitives. However for simplicity, we resort
+  to evaluating whether a termination condition for each primitive is met
+  in every configuration. This is a common approach under the options
+  framework <span class="citation" data-cites="sutton1999between"></span>.
+  The tuples <span class="math inline">\((s,a)\)</span>, containing the
+  state of the environment and the feasible action performed in the state
+  respectively, are stored in the <em>play</em>-dataset <span
+  class="math inline">\(\mathcal{D}\)</span> for training the prior.</p>
+  <h3 id="app:baselines" class="title is-5">Hyperparameters and Architectures</h3>
+  <p>Across all baselines and experiments, unless explicitly stated, we
+  use the same set of hyperparameters and neural network architectures
+  Values are reported in Table <a href="#table:hyperparams-new"
+  data-reference-type="ref"
+  data-reference="table:hyperparams-new">[table:hyperparams-new]</a>. We
+  choose a set of values that was found to perform well in previous works.
+  We report the list of hyperparameters that were tuned for each method in
+  the following subsections.</p>
+  <strong>DDQN</strong>
+  <ul>
+  <li><p>Discount <span class="math inline">\(\gamma\)</span>: <span
+  class="math inline">\(0.97\)</span>. Tuned over <span
+  class="math inline">\([0.90, 0.95, 0.97, 0.99]\)</span>.</p></li>
+  </ul>
+  <strong>DDQN+HER</strong>
+  <ul>
+  <li><p>Relabeling ratio <span class="math inline">\(k\)</span>: <span
+  class="math inline">\(4\)</span>. As suggested in the original paper
+  <span class="citation"
+  data-cites="andrychowicz2017hindsight"></span>.</p></li>
+  <li><p>Discount <span class="math inline">\(\gamma\)</span>: <span
+  class="math inline">\(0.97\)</span>. Tuned over <span
+  class="math inline">\([0.90, 0.95, 0.97, 0.99]\)</span>.</p></li>
+  </ul>
+  <strong>DDQN+Prefill</strong>
+  <ul>
+  <li><p>Discount <span class="math inline">\(\gamma\)</span>: <span
+  class="math inline">\(0.95\)</span>. Tuned over <span
+  class="math inline">\([0.90, 0.95, 0.97, 0.99]\)</span>.</p></li>
+  <li><p>Prefill dataset: The dataset used to prefill the replay buffer is
+  the same as the <em>Play</em>-dataset used to train the behavioral
+  prior, but extending the tuples <span class="math inline">\((s,a) \to
+  (s,a,s&#39;,g,r)\)</span> to be able to perform TD-loss on them. Given
+  that the <em>Play</em>-dataset is task-agnostic, we decide to compute
+  the rewards with relabelling, i.e., to relabel the goal <span
+  class="math inline">\(g\)</span> to the achieved goal and to set the
+  reward <span class="math inline">\(r\)</span> to <span
+  class="math inline">\(1\)</span>, otherwise set the reward to zero. We
+  experiment with different relabeling frequencies <span
+  class="math inline">\(f \in [0.0, 0.25, 0.5, 0.75, 1.0]\)</span>. We
+  find that <span class="math inline">\(f&gt;0\)</span> leads to
+  overestimation of the Q-values at early stages of training and thus hurt
+  performance. For this reason we use <span
+  class="math inline">\(f=0\)</span>, i.e., no relabelling.</p></li>
+  </ul>
+  <strong>DQfD</strong>
+  <ul>
+  <li><p>Discount <span class="math inline">\(\gamma\)</span>: <span
+  class="math inline">\(0.95\)</span>. Tuned over <span
+  class="math inline">\([0.90, 0.95, 0.97, 0.99]\)</span>.</p></li>
+  <li><p>Large margin classification loss weight <span
+  class="math inline">\(\lambda_2\)</span>: <span
+  class="math inline">\(1e^{-3}\)</span>. Tuned over <span
+  class="math inline">\([1e^{-2}, 1e^{-3}, 1e^{-4},
+  1e^{-5}]\)</span>.</p></li>
+  <li><p>Expert margin: <span class="math inline">\(0.05\)</span>. Tuned
+  over <span class="math inline">\([0.01, 0.05, 0.1, 0.5,
+  0.8]\)</span>.</p></li>
+  <li><p>L2 regularization loss weight <span
+  class="math inline">\(\lambda_3\)</span>: <span
+  class="math inline">\(1e^{-5}\)</span>.</p></li>
+  <li><p>Prefill dataset: Same approach as for DDQN+Prefill explained
+  above.</p></li>
+  </ul>
+  <strong>SOFT ELF-P</strong>
+  <ul>
+  <li><p>Discount <span class="math inline">\(\gamma\)</span>: <span
+  class="math inline">\(0.97\)</span>. Tuned over <span
+  class="math inline">\([0.90, 0.95, 0.97, 0.99]\)</span>.</p></li>
+  </ul>
+  <strong>SPiRL</strong>
+  <ul>
+  <li><p>Discount <span class="math inline">\(\gamma\)</span>: <span
+  class="math inline">\(0.97\)</span>. Tuned over <span
+  class="math inline">\([0.90, 0.95, 0.97, 0.99]\)</span>.</p></li>
+  <li><p>KL weight <span class="math inline">\(\alpha\)</span>: 0.01.
+  Tuned over <span class="math inline">\([0.005, 0.01,
+  0.05]\)</span>.</p></li>
+  <li><p>Actor-network architecture: MLP [128, 256]</p></li>
+  </ul>
+  <h4 id="section"></h4>
+  <ul>
+  <li><p>Discount <span class="math inline">\(\gamma\)</span>: <span
+  class="math inline">\(0.97\)</span>. Tuned over <span
+  class="math inline">\([0.90, 0.95, 0.97, 0.99]\)</span>.</p></li>
+  <li><p>Prior training: we use the parameters reported in Table <a
+  href="#table:hyperparams-prior" data-reference-type="ref"
+  data-reference="table:hyperparams-prior">[table:hyperparams-prior]</a>.</p></li>
+  </ul>
+  <h2 id="app:hardware_exp" class="title is-3">Hardware experiments</h2>
+  <p>The experiments are carried out on a real desktop setting depicted in
+  Figure <a href="#fig:method" data-reference-type="ref"
+  data-reference="fig:method">[fig:method]</a> (upper right). We use
+  <em>Boston Dynamics</em> Spot robot <span class="citation"
+  data-cites="noauthor_spot_nodate"></span> for all our experiments. The
+  high-level planner, trained in simulation, is used at inference time to
+  predict the required sequence of motion primitives to achieve a desired
+  goal. The motion primitives are executed using established motion
+  planning methods <span class="citation"
+  data-cites="zimmermann2022dca"></span> to create optimal control
+  trajectories. We then send desired commands to Spot using <em>Boston
+  Dynamics Spot SDK</em>, a Python API provided by Boston Dynamics, which
+  we interface with using <em>pybind11</em>. We refer the reader to the
+  Video material for a visualization of the real-word experiments.</p>
+  <h2 id="app:optimality"class="title is-3">Optimality</h2>
+  <p>Let us consider an MDP <span
+  class="math inline">\(\mathcal{M}\)</span>, the reduced MDP <span
+  class="math inline">\(\mathcal{M&#39;}\)</span> as defined in Subsection
+  <a href="#ssec:learn_maskedQ1" data-reference-type="ref"
+  data-reference="ssec:learn_maskedQ1">[ssec:learn_maskedQ1]</a>, the
+  selection operator <span class="math inline">\({\alpha: \mathcal{S \to
+  P(A)}}\)</span> and a set of feasible policies under <span
+  class="math inline">\(\alpha\)</span>: <span
+  class="math inline">\(\Pi_\alpha=\{ \pi | \pi(s,g) \in \alpha(s) \forall
+  s \in \mathcal{S}, g \in \mathcal{G} \}\)</span>.</p>
+  <div class="theorem">
+  <p>Given an MDP <span class="math inline">\(\mathcal{M}\)</span>, the
+  reduced MDP <span class="math inline">\(\mathcal{M&#39;}\)</span> and a
+  selection operator <span class="math inline">\(\alpha\)</span> such that
+  the optimal policy for <span class="math inline">\(\mathcal{M}\)</span>
+  belongs to <span class="math inline">\(\Pi_\alpha\)</span> (that is
+  <span class="math inline">\(\pi_{\mathcal{M}}^*(s, g) \in
+  \Pi_\alpha\)</span>), the optimal policy in <span
+  class="math inline">\(\mathcal{M&#39;}\)</span> is also optimal for
+  <span class="math inline">\(\mathcal{M}\)</span>, i.e. <span
+  class="math inline">\(\pi_{\mathcal{M&#39;}}^*(s, g) =
+  \pi_{\mathcal{M}}^*(s, g)\)</span>.</p>
+  </div>
+  <div class="proof">
+  <p><em>Proof.</em> We can define a goal-conditioned value function <span
+  class="math inline">\(V^\pi(s,g)\)</span>, defined as the expected sum
+  of discounted future rewards if the agent starts in <span
+  class="math inline">\(s\)</span> and follows policy <span
+  class="math inline">\(\pi\)</span> thereafter: <span
+  class="math inline">\({V^\pi(s, g) =
+  \mathbb{E}_{\mu^\pi}\left[\sum_{t-1}^\infty \gamma^{t-1} R(s, g)
+  \right]}\)</span> under the trajectory distribution <span
+  class="math inline">\({\mu^\pi(\tau|g) = \rho_0(s_0) \prod_{t=0}^\infty
+  P(s_{t+1}|s_t, a_t)}\)</span> with <span class="math inline">\(a_t =
+  \pi(s_t, g) \; \forall t\)</span>. By construction, the transition
+  kernel <span class="math inline">\(P\)</span> and the reward function
+  <span class="math inline">\(R\)</span> are shared across <span
+  class="math inline">\(\mathcal{M}\)</span> and <span
+  class="math inline">\(\mathcal{M&#39;}\)</span>, and a feasible policy
+  <span class="math inline">\(\pi\)</span> always selects the same action
+  in both MDPs, thus trajectory distributions and value functions are also
+  identical for feasible policies. More formally, if <span
+  class="math inline">\(\pi \in \Pi_\alpha\)</span>, then <span
+  class="math inline">\(\mu^\pi_{\mathcal{M}}=\mu^\pi_{\mathcal{M&#39;}}\)</span>
+  and <span class="math inline">\(V^\pi_{\mathcal{M}}(s, g) =
+  V^\pi_{\mathcal{M&#39;}}(s, g)\)</span>.</p>
+  <p>It is then sufficient to note that <span
+  class="math display">\[\pi_{\mathcal{M&#39;}}^*(s,
+  g)\stackrel{def}{=}\arg\max_{\pi \in \Pi_\alpha}
+  V^{\pi}_{\mathcal{M&#39;}}(s, g)=\arg\max_{\pi \in \Pi_\alpha}
+  V^{\pi}_{\mathcal{M}}(s,g)=\arg\max_{\pi \in \Pi}
+  V^{\pi}_{\mathcal{M}}(s, g)\stackrel{def}{=}\pi_{\mathcal{M}}^*(s,
+  g),\]</span> where the second equality is due to the previous statement,
+  and the third equality is granted by the assumption that the optimal
+  policy for <span class="math inline">\(\mathcal{M}\)</span> is feasible
+  in <span class="math inline">\(\mathcal{M&#39;}\)</span> (i.e. <span
+  class="math inline">\(\pi_\mathcal{M}^* \in \Pi_\alpha\)</span>). ◻</p>
+  </div>
+  <p>Hence, our proposed algorithm, which allows us learning directly on
+  the reduced MDP <span class="math inline">\(\mathcal{M&#39;}\)</span>,
+  can under mild assumptions retrieve the optimal policy in the original
+  <span class="math inline">\(\mathcal{M}\)</span>.</p>
+  <p>We finally remark that model-free PAC-MDP algorithms have shown to
+  produce upper bounds on sample complexity that are <span
+  class="math inline">\(\tilde O(N)\)</span>, where <span
+  class="math inline">\(N \leq |\mathcal{S}||\mathcal{A}|\)</span> <span
+  class="citation" data-cites="lattimore2012pac"></span>, i.e., directly
+  dependent on the number of state-action pairs. Hence, learning in the
+  reduced MDP <span class="math inline">\(\mathcal{M&#39;}\)</span>
+  instead of <span class="math inline">\(\mathcal{M}\)</span> could lead
+  to near-linear improvements in sample efficiency as the number of
+  infeasible actions grows. We demonstrate it empirically in the
+  subsection <em>Sample Complexity</em> in <a href="#sec:Experiments"
+  data-reference-type="ref"
+  data-reference="sec:Experiments">[sec:Experiments]</a>.</p>
+  </body>
+  </html>
+  
+
+
