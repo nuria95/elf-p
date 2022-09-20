@@ -271,8 +271,8 @@ type="text/javascript"></script>
 
 
   <div class="wrapfigure">
-  <p><span>r</span><span>45mm</span> <img
-  src="figures-appendix/fig1_pybullet.png" alt="image" /></p>
+  <img
+  src="figures-appendix/fig1_pybullet.png" alt="image" width="400" height="auto"/></p>
   <p><span id="fig:pybullet-env" label="fig:pybullet-env"></span></p>
   </div>
   <p>In the case of multiple primitives for one action (i.e. actions 8, 9
@@ -303,20 +303,25 @@ type="text/javascript"></script>
   because the environment dynamics are not smooth and the policy fails to
   generalize to distant goals despite the relabeling, which may hurt
   performance.</p>
+  
+
+  <div class="wrapfigure">
+  <img
+  src="figures-appendix/legend_her_flat.jpg" alt="image" width="400" height="auto" id="fig:her-results" 
+  </div>
+
+
   <div class="center">
-  <figure>
-  <embed src="figures-appendix/legend_her_flat.pdf"
-  id="fig:her-results" />
-  <figcaption aria-hidden="true">Effect of relabeling ratio on success
-  rate for the Medium (left) and Hard (right) task variants. Results are
-  averaged across 10 independent random seeds, shaded area represents
-  standard deviation. (Play dataset size <span
-  class="math inline">\(10^5\)</span>). </figcaption>
-  </figure>
-  <p><embed src="figures-appendix/ours_her_medium.pdf" /> <embed
-  src="figures-appendix/ours_her_hard.pdf" /></p>
+  <p><embed src="figures-appendix/ours_her_medium.jpg" width="400" height="auto"/> 
+  <embed src="figures-appendix/ours_her_hard.jpg" width="400" height="auto"/></p>
   </div>
   <p><span id="fig:her-results" label="fig:her-results"></span></p>
+  <figcaption aria-hidden="true">Effect of relabeling ratio on success
+    rate for the Medium (left) and Hard (right) task variants. Results are
+    averaged across 10 independent random seeds, shaded area represents
+    standard deviation. (Play dataset size <span
+    class="math inline">\(10^5\)</span>). </figcaption> 
+
   <h3 id="app:sample-complexity" class="title is-5">Sample complexity</h3>
   <p>Results reported in subsection <em>Sample Complexity</em> in Section
   <a href="#sec:Experiments" data-reference-type="ref"
@@ -354,35 +359,12 @@ type="text/javascript"></script>
   data-reference="fig:full-datasize-simulation-results">2</a> we show the
   resulting training curves for all baselines using the biggest dataset
   (with <span class="math inline">\(10^5\)</span> datapoints).</p>
-  <div style="color: elfp">
-  <hr />
-  </div>
-  <p><span class="roman">ELF-P</span></p>
-  <div style="color: ddqn">
-  <hr />
-  </div>
-  <p><span class="roman">DDQN</span></p>
-  <div style="color: her">
-  <hr />
-  </div>
-  <p><span class="roman">DDQN+HER</span></p>
-  <div style="color: prefill">
-  <hr />
-  </div>
-  <p><span class="roman">DDQN+Prefill</span></p>
-  <div style="color: ddqnfd">
-  <hr />
-  </div>
-  <p><span class="roman">DDQNfD</span></p>
-  <div style="color: spirl">
-  <hr />
-  </div>
-  <p><span class="roman">SPIRL</span></p>
+
   <div class="center">
   <p><embed src="figures-appendix/medium_datasize_effect.pdf" /> <embed
   src="figures-appendix/medium_inv_action_datasize_effect.pdf" /></p>
-  <p><embed src="figures-appendix/hard_datasize_effect.pdf" /> <embed
-  src="figures-appendix/hard_inv_action_datasize_effect.pdf" /></p>
+  <p><embed src="figures-appendix/hard_datasize_effect.jpg" width="400" height="auto"" /> <embed
+  src="figures-appendix/hard_inv_action_datasize_effect.jpg"width="400" height="auto" /></p>
   </div>
   <p><span id="fig:trainig-curves-datasize-effect"
   label="fig:trainig-curves-datasize-effect"></span></p>
