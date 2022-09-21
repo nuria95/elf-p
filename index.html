@@ -263,7 +263,7 @@ type="text/javascript"></script>
   <h3 class="title is-5">Training environment</h3>
 
   <p>The environment is built on <em>Pybullet</em> physics simulation
-  software <span class="citation" data-cites="coumans2021"></span> and it
+  software [14] and it
   is shown in Figure <a href="#fig:pybullet-env">S1</a>. The states
   <span class="math inline">\(\in \mathbb{R}^{11}\)</span> include the 3D
   robot’s end-effector position, a binary variable representing the
@@ -319,8 +319,7 @@ type="text/javascript"></script>
   <h2 id="app:experiments" class="title is-3">Extended Experimental Results</h2>
   <h3 id="her" class="title is-5">HER</h3>
   <p>We experiment with combining our method with off-policy goal
-  relabeling <span class="citation"
-  data-cites="andrychowicz2017hindsight"></span> [??]. We evaluate different
+  relabeling [34]. We evaluate different
   relabeling ratios <span class="math inline">\(k\)</span>. As already
   mentioned in the Results, we observe that the greater the relabeling
   ratio, the slower the convergence to the optimal policy (see Figure <a
@@ -577,7 +576,7 @@ type="text/javascript"></script>
   from a predefined set of primitives. However for simplicity, we resort
   to evaluating whether a termination condition for each primitive is met
   in every configuration. This is a common approach under the options
-  framework <span class="citation" data-cites="sutton1999between"></span>.
+  framework [30].
   The tuples <span class="math inline">\((s,a)\)</span>, containing the
   state of the environment and the feasible action performed in the state
   respectively, are stored in the <em>play</em>-dataset <span
@@ -648,8 +647,7 @@ type="text/javascript"></script>
   <tr class="odd">
   <td style="text-align: center;">Optimizer</td>
   <td style="text-align: center;">Adam (<span
-  class="math inline">\(\beta_1=0.9, \beta_2=0.999\)</span>) <span
-  class="citation" data-cites="kingma2014"></span></td>
+  class="math inline">\(\beta_1=0.9, \beta_2=0.999\)</span>) [15]</td>
   <td style="text-align: center;"></td>
   </tr>
   <tr class="even">
@@ -751,8 +749,7 @@ type="text/javascript"></script>
     <tr class="odd">
     <td style="text-align: center;">Prior optimizer</td>
     <td style="text-align: center;">Adam(<span
-    class="math inline">\(\beta_1=0.9, \beta_2=0.999\)</span> <span
-    class="citation" data-cites="kingma2014"></span></td>
+    class="math inline">\(\beta_1=0.9, \beta_2=0.999\)</span> [15]</td>
     <td style="text-align: center;"></td>
     </tr>
     <tr class="even">
@@ -787,9 +784,8 @@ type="text/javascript"></script>
   <strong>DDQN+HER</strong>
   <ul>
   <li><p>Relabeling ratio <span class="math inline">\(k\)</span>: <span
-  class="math inline">\(4\)</span> (as suggested in the original paper).
-  <span class="citation"
-  data-cites="andrychowicz2017hindsight"></span>.</p></li>
+  class="math inline">\(4\)</span> (as suggested in the original paper
+ [34]).</p></li>
   <li><p>Discount <span class="math inline">\(\gamma\)</span>: <span
   class="math inline">\(0.97\)</span>. Tuned over <span
   class="math inline">\([0.90, 0.95, 0.97, 0.99]\)</span>.</p></li>
@@ -804,8 +800,8 @@ type="text/javascript"></script>
   prior, but extending the tuples <span class="math inline">\((s,a) \to
   (s,a,s&#39;,g,r)\)</span> to be able to perform TD-loss on them. Given
   that the <em>Play</em>-dataset is task-agnostic, we decide to compute
-  the rewards with relabelling, i.e., to relabel the goal <span
-  class="math inline">\(g\)</span> to the achieved goal and to set the
+  the rewards with relabelling, i.e., to relabel the <span
+  class="math inline">\(g\)</span> to the achieved goal and to sgoal et the
   reward <span class="math inline">\(r\)</span> to <span
   class="math inline">\(1\)</span>, otherwise set the reward to zero. We
   experiment with different relabeling frequencies <span
@@ -862,13 +858,11 @@ type="text/javascript"></script>
   <h2 id="app:hardware_exp" class="title is-3">Hardware experiments</h2>
   <p>The experiments are carried out on a real desktop setting depicted in
   Figure 1 (main paper)(upper right). We use
-  <em>Boston Dynamics</em> Spot robot <span class="citation"
-  data-cites="noauthor_spot_nodate"></span> for all our experiments. The
+  <em>Boston Dynamics</em> Spot robot [56] for all our experiments. The
   high-level planner, trained in simulation, is used at inference time to
   predict the required sequence of motion primitives to achieve a desired
   goal. The motion primitives are executed using established motion
-  planning methods <span class="citation"
-  data-cites="zimmermann2022dca"></span> to create optimal control
+  planning methods [73] to create optimal control
   trajectories. We then send desired commands to Spot using <em>Boston
   Dynamics Spot SDK</em>, a Python API provided by Boston Dynamics, which
   we interface with using <em>pybind11</em>. We refer the reader to the
@@ -938,8 +932,7 @@ type="text/javascript"></script>
   <p>We finally remark that model-free PAC-MDP algorithms have shown to
   produce upper bounds on sample complexity that are <span
   class="math inline">\(\tilde O(N)\)</span>, where <span
-  class="math inline">\(N \leq |\mathcal{S}||\mathcal{A}|\)</span> <span
-  class="citation" data-cites="lattimore2012pac"></span>, i.e., directly
+  class="math inline">\(N \leq |\mathcal{S}||\mathcal{A}|\)</span>[64], i.e., directly
   dependent on the number of state-action pairs. Hence, learning in the
   reduced MDP <span class="math inline">\(\mathcal{M&#39;}\)</span>
   instead of <span class="math inline">\(\mathcal{M}\)</span> could lead
