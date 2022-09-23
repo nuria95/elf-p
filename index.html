@@ -65,7 +65,7 @@
     padding: 1px;
     font-size: 15px;
     caption-side: bottom;
-    text-align: left;
+    text-align: center;
 
 }
 figure {
@@ -76,7 +76,28 @@ figure {
 
 figure img {
   display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.column3 {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+.column2 {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
   @media (max-width: 600px) {
     body {
       font-size: 0.9em;
@@ -271,19 +292,19 @@ type="text/javascript"></script>
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Video</h2>
+          <h2 class="title is-3"> Video</h2>
           <div class="publication-video">
-            <video id="teaser" controls height="100%" >
-              <source src="video/Video_Efficient_Learning_High_Level_Plans_from_Play.mp4"
-                      type="video/mp4">
-            </video>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/nXBF0Pcj-qI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
           </div>
          
         </div>
       </div>
     </div>
   </section>
-  
+
+
+
   <p>
   <h2 class="title is-3">A.1 Environment</h2>
   <h3 class="title is-5">A.1.1 Training environment</h3>
@@ -356,9 +377,10 @@ type="text/javascript"></script>
   
 
   <figure>
-  <img src="figures-appendix/legend_her_flat.jpg" alt="image" width="400" height="auto">
+  <img src="figures-appendix/legend_her_flat.jpg" alt="image"style="width:50%">
   </figure>
 
+  <!--
   <div class="center">
   <p><embed src="figures-appendix/ours_her_medium.jpg" width="400" height="auto"/> 
   <embed src="figures-appendix/ours_her_hard.jpg" width="400" height="auto" id="fig:her-results"/></p>
@@ -368,6 +390,23 @@ type="text/javascript"></script>
     averaged across 10 independent random seeds, shaded area represents
     standard deviation. (Play dataset size <span
     class="math inline">\(10^5\)</span>). </figcaption> 
+  -->
+
+
+
+    <div class="row">
+      <div class="column2">
+        <img  src="figures-appendix/ours_her_medium.jpg" style="width:90%">
+      </div>
+      <div class="column2">
+        <img src="figures-appendix/ours_her_hard.jpg" style="width:90%" id="fig:her-results">
+      </div>
+    </div>
+    <figcaption aria-hidden="false"> Figure S2: Effect of relabeling ratio on success
+      rate for the Medium (left) and Hard (right) task variants. Results are
+      averaged across 10 independent random seeds, shaded area represents
+      standard deviation. (Play dataset size <span
+      class="math inline">\(10^5\)</span>). </figcaption> 
 
   <h3 id="app:sample-complexity" class="title is-5">A.2.2 Sample complexity</h3>
   <p>Results reported in Subsection <em>V-A3) Sample Complexity</em> (main paper) are obtained by
@@ -387,11 +426,22 @@ type="text/javascript"></script>
   
   
   
+  <!--
   <div class="wrapfigure">
  <embed src="figures_icra/boxplot_hard_True.jpg" width="400" height="auto"id="fig:sample-complxity-hard"/>
   <figcaption> Figure S3: Effect of <span
     class="math inline">\(\rho\)</span> on sample complexity for the Hard task. Means across seeds are connected by lines.</figcaption>
   </div>
+-->
+
+  <figure>
+    <img src="figures_icra/boxplot_hard_True.jpg" width="400" height="auto"id="fig:sample-complxity-hard"/>
+     <figcaption> Figure S3: Effect of <span
+       class="math inline">\(\rho\)</span> on sample complexity for the Hard task. Means across seeds are connected by lines.</figcaption>
+
+  </figure>
+
+
   <h3 id="app:robustness-datasize" class="title is-5">A.2.3 Robustness to play dataset size</h3>
   <p>We study the effect of play dataset size on training performance for
   both ELF-P and DDQN+Prefill (which affects the amount of data used for
@@ -407,16 +457,27 @@ type="text/javascript"></script>
   (with <span class="math inline">\(10^5\)</span> datapoints).</p>
   -->
 
-  
+
+
   <figure>
-    <img src="figures-appendix/legend_datasize_effect.png" alt="image" width="200" height="auto">
+    <img src="figures-appendix/legend_datasize_effect.png" alt="image"  style="width:30%">
     </figure>
 
-  <div class="center">
-  <p><embed src="figures-appendix/medium_datasize_effect.jpg" width="400" height="auto" /> <embed
-  src="figures-appendix/medium_inv_action_datasize_effect.jpg" width="400" height="auto"/></p>
-  <p><embed src="figures-appendix/hard_datasize_effect.jpg" width="400" height="auto" /> <embed
-  src="figures-appendix/hard_inv_action_datasize_effect.jpg"width="400" height="auto" id="fig:trainig-curves-datasize-effect" /></p>
+<div class="row">
+  <div class="column2">
+    <img src="figures-appendix/medium_datasize_effect.jpg" style="width:90%">
+  </div>
+  <div class="column2">
+    <img src="figures-appendix/medium_inv_action_datasize_effect.jpg" style="width:90%">
+  </div>
+<div class="row">
+  <div class="column2">
+    <img src="figures-appendix/hard_datasize_effect.jpg" width="400" style="width:90%">
+  </div>
+  <div class="column2">
+    <img src="figures-appendix/hard_inv_action_datasize_effect.jpg" style="width:90%" id="fig:trainig-curves-datasize-effect">
+  </div>
+</div>
   <figcaption> Figure S4: Success rate and number of infeasible actions attempts for the Medium
     (top) and Hard (bottom) task variants for 3 different dataset sizes:
     from darker to lighter <span
@@ -560,20 +621,22 @@ type="text/javascript"></script>
   further exploration on the topic for future work.</p>
 
   <figure>
-  <img src="figures-appendix/legend_with_soft.png" width="200" height="auto">
+  <img src="figures-appendix/legend_with_soft.png"  style="width:30%">
   </figure>
 
-  <div class="center">
-  <p><embed src="figures-appendix/medium_with_soft_datapoints10000.jpg" width="400" height="auto"/> 
-  <embed src="figures-appendix/medium_inv_action_with_soft_datapoints10000.jpg" width="400" height="auto" id="fig:soft_vs_hard_appendix"/></p>
+  <div class="row">
+    <div class="column2">
+    <img src="figures-appendix/medium_with_soft_datapoints10000.jpg" style="width:90%">
   </div>
+    <div class="column2">
+    <img src="figures-appendix/medium_inv_action_with_soft_datapoints10000.jpg" style="width:90%"> id="fig:soft_vs_hard_appendix"/></p>
+  </div>
+</div>
   <figcaption aria-hidden="true">Comparison between ELF-P and Soft-ELF-P. Success
     rate and number of infeasible actions attempts for the Medium task variant. (Play dataset size <span
     class="math inline">\(10^4\)</span>).Results are averaged across 10
     independent random seeds, shaded area represents standard deviation)
     </figcaption>
-
-
 
 
   <h2 id="app:additional_exp_details" class="title is-3">A.3 Additional experimental details</h2>
